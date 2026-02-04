@@ -89,11 +89,20 @@ Koperasi Dagang is a comprehensive, web-based cooperative management system desi
 
 ### 3️⃣ Loan Management
 
-- **Loan Products**: Multiple loan types (productive, consumptive, emergency)
+- **Loan Application (Dual Entry)**:
+  - Members submit via self-service portal with loan amount and preferred term
+  - Admin can create applications in admin panel (for offline members or staff-assisted)
+- **Loan Products**: Multiple loan types (productive, consumptive, emergency) with configurable interest rates
+- **Automatic Payment Calculation**: System auto-calculates monthly payment amount based on:
+  - Loan amount requested
+  - Loan term (months)
+  - Interest rate for product type
+  - Generates complete amortization schedule
+- **Admin Adjustment**: Admin can modify calculated payment terms, monthly amount, or interest before approval
 - **Credit Analysis**: Built-in credit scoring and assessment tools
-- **Approval Workflow**: Multi-level approval with committee review
-- **Disbursement**: Direct to savings account or cash disbursement
-- **Repayment Tracking**: Automated schedule generation and payment allocation
+- **Approval Workflow**: All applications (member-submitted or admin-created) require admin/committee approval before disbursement
+- **Disbursement**: Direct to savings account or cash disbursement after approval
+- **Repayment Tracking**: Automated schedule tracking and payment allocation with real-time status
 - **Collateral Management**: Document and track loan collaterals
 - **Collection Tools**: Aging reports, reminders, and collection tracking
 
@@ -215,7 +224,8 @@ Koperasi Dagang is a comprehensive, web-based cooperative management system desi
 ## Infrastructure Highlights
 
 - **Scalable Architecture**: Repository Pattern with Service Layer for maintainability
-- **RESTful API**: Prepared for mobile app and third-party integrations
+- **RESTful API**: Prepared for mobile app and third-party integrations, including HCMS payroll integration
+- **HCMS Integration Ready**: APIs designed to expose employee loan and savings data for payroll deductions and reporting
 - **Queue System**: Background processing for heavy reports and notifications
 - **Caching Layer**: Redis for sessions and frequently accessed data
 - **Backup Automation**: Scheduled database backups with retention policies
@@ -244,7 +254,9 @@ Member Request → Teller Input → Validation → Process Transaction → Updat
 **Loan Workflow:**
 
 ```
-Application → Document Upload → Credit Analysis → Committee Review → Approval/Rejection → Disbursement → Schedule Generation → Repayment Tracking → Closure
+Member Portal OR Admin Entry → Loan Amount + Term Input → Auto-Calculate Payment Schedule → 
+Credit Analysis → Admin/Committee Review → Modify Terms (if needed) → Approval/Rejection → 
+Disbursement → Repayment Tracking → Collection → Closure
 ```
 
 ### Trading Operations (Perdagangan)
@@ -284,7 +296,9 @@ Reorder Alert → Create PO → Supplier Confirmation → Goods Receipt → Qual
 | **Revenue Breakdown**      | Interest income, trading profit, fees collected                  |
 | **SHU Projection**         | Estimated surplus for current period                             |
 | **Recent Transactions**    | Live feed of last 20 transactions                                |
-| **Pending Approvals**      | Loans, journal entries awaiting manager approval                 |
+| **Pending Approvals**      | Loan applications, journal entries awaiting manager approval      |
+| **Payment Schedules**      | Loan amortization schedule with monthly payment breakdown         |
+| **Loan Calculator**        | Real-time calculation of monthly payments based on term/amount    |
 | **Alerts & Notifications** | Overdue loans, low stock items, system alerts                    |
 
 ---
@@ -326,6 +340,7 @@ Reorder Alert → Create PO → Supplier Confirmation → Goods Receipt → Qual
 | **High**   | User Guide Documentation - Step-by-step manual for all modules |
 | **High**   | Testing Documentation - Test cases, test data, UAT scripts     |
 | **High**   | API Documentation - OpenAPI/Swagger for integrations           |
+| **High**   | HCMS Payroll Integration - API to sync employee loans/savings data for payroll deductions and reporting |
 | **Medium** | Mobile Application - Member self-service mobile app            |
 | **Medium** | SMS/WhatsApp Notifications - Payment reminders, balance alerts |
 | **Medium** | Biometric Integration - Fingerprint for member verification    |
@@ -341,7 +356,8 @@ Reorder Alert → Create PO → Supplier Confirmation → Goods Receipt → Qual
 | Component             | Choice                     | Why                                                                        |
 | --------------------- | -------------------------- | -------------------------------------------------------------------------- |
 | **Backend Framework** | Laravel 11+                | Robust PHP framework with excellent ecosystem, widely adopted in Indonesia |
-| **Frontend**          | Livewire 3 + Alpine.js     | Server-rendered reactivity, reduced JavaScript complexity                  |
+| **Admin Panel**       | Laravel Filament 3         | Modern admin panel with built-in resources, forms, tables, and dashboard   |
+| **Frontend Tech**     | Livewire 3 + Alpine.js + Tailwind CSS | Server-rendered reactivity, modern UI components, reduced complexity |
 | **Database**          | MySQL 8.0+                 | Reliable RDBMS, strong ACID compliance, JSON support for flexibility       |
 | **Authentication**    | Laravel Sanctum            | Lightweight SPA authentication, API token support                          |
 | **Authorization**     | Spatie Laravel Permission  | Industry-standard role/permission management                               |
@@ -352,6 +368,36 @@ Reorder Alert → Create PO → Supplier Confirmation → Goods Receipt → Qual
 | **Queue/Jobs**        | Laravel Queue + Redis      | Background report generation, notifications                                |
 | **Caching**           | Redis                      | Session management, query caching                                          |
 | **Testing**           | PHPUnit + Pest             | Comprehensive unit and feature testing                                     |
+| **UI Components**     | Filament Admin Resources   | Pre-built resources for Members, Transactions, Reports, etc.               |
+| **API Integration**   | RESTful API + OAuth 2.0    | Secure integration with external systems like HCMS payroll                |
+
+### Integration Capabilities
+
+**HCMS Payroll Integration**
+
+The system provides REST APIs that expose employee member data to the HCMS payroll system:
+
+- **Employee Loan Data**:
+  - Outstanding loan balance
+  - Monthly payment amount
+  - Loan status (Active, Completed, Default)
+  - Loan deduction for payroll processing
+
+- **Employee Savings Data**:
+  - Total savings balance by product type
+  - Mandatory vs voluntary contributions
+  - Interest accrued
+  - Withdrawal/contribution history
+
+- **API Endpoints**:
+  - `GET /api/employees/{employee_id}/loans` - Retrieve active loans
+  - `GET /api/employees/{employee_id}/savings` - Retrieve savings accounts
+  - `GET /api/employees/{employee_id}/deductions` - Calculate total monthly deductions (loans + mandatory savings)
+  - `POST /api/loans/{loan_id}/payments` - Record loan payments from payroll
+  - `POST /api/savings/{account_id}/contributions` - Record mandatory savings deductions
+
+- **Authentication**: OAuth 2.0 token-based for secure HCMS integration
+- **Real-Time Sync**: Payment and contribution data synced immediately after payroll processing
 
 ### Database Schema Overview
 
