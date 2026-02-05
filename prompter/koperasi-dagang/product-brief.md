@@ -66,73 +66,50 @@ Koperasi Dagang is a comprehensive, web-based cooperative management system desi
 
 ---
 
-## Core Capabilities
+## MVP (Phase 1) Core Capabilities
 
-### 1️⃣ Master Data Management
+### 1️⃣ Member Registration & Portal Access
 
-- **Member Registry**: Complete member lifecycle management from registration to termination
-- **Product Catalog**: Configure savings products, loan products, and merchandise inventory
-- **Chart of Accounts**: Flexible accounting structure following SAK ETAP standards
-- **Branch/Unit Management**: Multi-branch support with consolidated reporting
-- **User & Role Management**: Granular permission control for system security
-- **Supplier Database**: Vendor management for trading operations
-- **System Parameters**: Configurable interest rates, fees, penalties, and fiscal periods
+- **Member Registry**: Basic member registration form (name, email, phone, address, ID number)
+- **Member Login**: Secure login to self-service portal
+- **Member Profile**: View own profile information
+- **User & Role Management**: Admin and member roles with basic permission control
 
-### 2️⃣ Savings & Deposits
+### 2️⃣ Savings Application Submission
 
-- **Simpanan Pokok** (Principal Savings): One-time initial membership contribution
-- **Simpanan Wajib** (Mandatory Savings): Monthly required member contributions
-- **Simpanan Sukarela** (Voluntary Savings): Flexible savings with interest earnings
-- **Time Deposits**: Fixed-term deposits with competitive rates
-- **Interest Calculation**: Automated daily/monthly interest computation
-- **Passbook Printing**: Generate digital or physical passbooks
+- **Savings Product Selection**: Members view available savings product types:
+  - Simpanan Pokok (Principal Savings)
+  - Simpanan Wajib (Mandatory Savings)
+  - Simpanan Sukarela (Voluntary Savings)
+- **Application Form**: Members enter:
+  - Selected product type
+  - Initial amount (if applicable)
+  - Submission date
+- **Admin Review**: Admins can view, approve, or reject savings applications
+- **Application Status**: Members can track their application status (Pending, Approved, Rejected)
 
-### 3️⃣ Loan Management
+### 3️⃣ Loan Application Submission
 
-- **Loan Application (Dual Entry)**:
-  - Members submit via self-service portal with loan amount and preferred term
-  - Admin can create applications in admin panel (for offline members or staff-assisted)
-- **Loan Products**: Multiple loan types (productive, consumptive, emergency) with configurable interest rates
-- **Automatic Payment Calculation**: System auto-calculates monthly payment amount based on:
+- **Loan Product Selection**: Members view available loan products with basic info (product name, interest rate)
+- **Application Form**: Members enter:
   - Loan amount requested
   - Loan term (months)
-  - Interest rate for product type
-  - Generates complete amortization schedule
-- **Admin Adjustment**: Admin can modify calculated payment terms, monthly amount, or interest before approval
-- **Credit Analysis**: Built-in credit scoring and assessment tools
-- **Approval Workflow**: All applications (member-submitted or admin-created) require admin/committee approval before disbursement
-- **Disbursement**: Direct to savings account or cash disbursement after approval
-- **Repayment Tracking**: Automated schedule tracking and payment allocation with real-time status
-- **Collateral Management**: Document and track loan collaterals
-- **Collection Tools**: Aging reports, reminders, and collection tracking
+  - Loan purpose
+  - Preferred disbursement date
+- **Admin Review**: Admins can view, approve, or reject loan applications
+- **Admin Notes**: Admins can add approval/rejection reasons
+- **Application Status**: Members can track their application status (Pending, Approved, Rejected)
 
-### 4️⃣ Trading & Retail Operations
+### Future Phase Capabilities
 
-- **Point of Sale (POS)**: Fast transaction processing for retail sales
-- **Inventory Management**: Real-time stock tracking with reorder alerts
-- **Purchase Orders**: Streamlined procurement workflow
-- **Goods Receipt**: Receiving and quality verification
-- **Member Pricing**: Special pricing tiers for cooperative members
-- **Credit Sales**: Member purchases on credit (integrated with loan module)
-- **Barcode Support**: SKU and barcode scanning for efficiency
-
-### 5️⃣ Accounting & Finance
-
-- **General Ledger**: Double-entry accounting with auto-posting
-- **Journal Entries**: Manual entries with approval workflow
-- **Bank Reconciliation**: Match bank statements with system records
-- **Cash Management**: Daily cash position and petty cash control
-- **Fiscal Period Management**: Period opening/closing with validation
-- **SHU Calculation**: Automated surplus distribution based on member participation
-
-### 6️⃣ Reporting & Analytics
-
-- **Financial Statements**: Balance Sheet, Income Statement, Cash Flow
-- **Member Reports**: Membership statistics, contribution analysis
-- **Loan Portfolio Reports**: Outstanding, aging, NPL ratio, collectibility
-- **Trading Reports**: Sales analysis, inventory movement, profit margins
-- **Regulatory Reports**: Standard formats for cooperative compliance
-- **Custom Reports**: Ad-hoc report builder for specific needs
+**Phase 2+** will include:
+- Transaction processing (savings deposits, loan disbursements, payments)
+- Balance tracking and interest calculation
+- Loan repayment scheduling and tracking
+- Trading/retail operations (POS, inventory)
+- Financial reporting and accounting
+- Dashboard analytics
+- And more...
 
 ---
 
@@ -151,73 +128,79 @@ Koperasi Dagang is a comprehensive, web-based cooperative management system desi
 
 ---
 
-## User Roles Supported
+## User Roles (MVP)
 
 | Role                      | Primary Functions                                                 |
 | ------------------------- | ----------------------------------------------------------------- |
-| **Super Admin**           | Full system access, user management, system configuration, backup |
-| **Manager (Pengurus)**    | Approval authority, executive dashboard, policy configuration     |
-| **Teller (Kasir)**        | Savings transactions, loan payments, daily cash handling          |
-| **Loan Officer**          | Loan applications, credit analysis, disbursement, collection      |
-| **Accountant**            | Journal entries, financial reports, reconciliation, closing       |
-| **Warehouse Staff**       | Inventory management, goods receipt, stock transfers              |
-| **Member Services**       | Member registration, inquiries, document management               |
-| **Auditor**               | Read-only access, audit reports, compliance verification          |
-| **Member (Self-Service)** | View balances, transaction history, loan applications             |
+| **Super Admin**           | Full system access, member management, approve/reject applications |
+| **Member (Self-Service)** | Register, login, submit loan and savings applications, view status |
+
+**Future Phases will add:**
+- Manager (Pengurus) - Executive oversight and approval authority
+- Teller (Kasir) - Savings transactions, loan payments, daily cash handling
+- Loan Officer - Loan disbursement, collection
+- Accountant - Financial reports, accounting
+- And more...
 
 ---
 
-## System Architecture / Modules
+## System Architecture / Modules (MVP)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                           KOPERASI DAGANG                               │
+│                    KOPERASI DAGANG MVP - PHASE 1                        │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
 │  ┌─────────────────────────────────────────────────────────────────┐   │
-│  │                      PRESENTATION LAYER                          │   │
-│  │  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────────┐   │   │
-│  │  │ Dashboard │ │   Forms   │ │  Reports  │ │ Member Portal │   │   │
-│  │  └───────────┘ └───────────┘ └───────────┘ └───────────────┘   │   │
+│  │              MEMBER SELF-SERVICE PORTAL                          │   │
+│  │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐             │   │
+│  │  │ Registration │ │    Login     │ │   Profile    │             │   │
+│  │  └──────────────┘ └──────────────┘ └──────────────┘             │   │
+│  │  ┌──────────────┐ ┌──────────────┐                              │   │
+│  │  │Submit Savings│ │ Submit Loan  │                              │   │
+│  │  │Applications  │ │ Applications │                              │   │
+│  │  └──────────────┘ └──────────────┘                              │   │
 │  └─────────────────────────────────────────────────────────────────┘   │
 │                                    │                                    │
 │  ┌─────────────────────────────────────────────────────────────────┐   │
-│  │                      APPLICATION LAYER                           │   │
-│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐   │   │
-│  │  │ Member  │ │ Savings │ │  Loan   │ │ Trading │ │Accounting│  │   │
-│  │  │ Module  │ │ Module  │ │ Module  │ │ Module  │ │ Module  │   │   │
-│  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘   │   │
-│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐   │   │
-│  │  │Inventory│ │  Report │ │Settings │ │  Audit  │ │Notifica-│   │   │
-│  │  │ Module  │ │ Engine  │ │ Module  │ │  Trail  │ │  tions  │   │   │
-│  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘   │   │
+│  │                 ADMIN DASHBOARD (BASIC)                          │   │
+│  │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐             │   │
+│  │  │View Members  │ │View Pending  │ │View Pending  │             │   │
+│  │  │              │ │Loan Apps     │ │Savings Apps  │             │   │
+│  │  └──────────────┘ └──────────────┘ └──────────────┘             │   │
+│  │  ┌──────────────┐ ┌──────────────┐                              │   │
+│  │  │Approve/Reject│ │Approve/Reject│                              │   │
+│  │  │Loan Apps     │ │Savings Apps  │                              │   │
+│  │  └──────────────┘ └──────────────┘                              │   │
 │  └─────────────────────────────────────────────────────────────────┘   │
 │                                    │                                    │
 │  ┌─────────────────────────────────────────────────────────────────┐   │
 │  │                       DATA LAYER                                 │   │
 │  │  ┌─────────────────────────────────────────────────────────┐    │   │
-│  │  │                    MySQL Database                        │    │   │
-│  │  │  Members │ Accounts │ Loans │ Inventory │ Journals │ ... │   │   │
+│  │  │                 MySQL Database                           │    │   │
+│  │  │  members │ loan_applications │ savings_applications │ ... │   │   │
 │  │  └─────────────────────────────────────────────────────────┘    │   │
 │  └─────────────────────────────────────────────────────────────────┘   │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Total Modules: 12 Core Modules**
+**MVP Modules: 3 Core Modules**
 
-1. Member Management
-2. Savings Management
-3. Loan Management
-4. Trading/POS
-5. Inventory Management
-6. Accounting/General Ledger
-7. Report Engine
-8. Dashboard & Analytics
-9. User & Role Management
-10. Settings & Parameters
-11. Audit Trail
-12. Member Self-Service Portal
+1. Member Management (Registration & Login)
+2. Loan Application Management
+3. Savings Application Management
+
+**Future Phases will add:**
+- 4. Teller Operations & Transactions
+- 5. Accounting & General Ledger
+- 6. Report Engine
+- 7. Dashboard & Analytics
+- 8. Trading/POS
+- 9. Inventory Management
+- 10. Settings & Parameters
+- 11. Audit Trail
+- 12. And more...
 
 ---
 
@@ -283,23 +266,22 @@ Reorder Alert → Create PO → Supplier Confirmation → Goods Receipt → Qual
 
 ---
 
-## Dashboard / Analytics
+## Dashboard / Admin Panel (MVP)
 
 | Widget                     | Purpose                                                          |
 | -------------------------- | ---------------------------------------------------------------- |
-| **Member Overview**        | Total active members, new registrations, membership trend        |
-| **Savings Summary**        | Total deposits by product type, growth percentage                |
-| **Loan Portfolio**         | Outstanding principal, disbursements this month, collection rate |
-| **NPL Indicator**          | Non-performing loan ratio with aging breakdown                   |
-| **Cash Position**          | Today's opening, transactions, projected closing balance         |
-| **Trading Performance**    | Daily/monthly sales, top products, gross margin                  |
-| **Revenue Breakdown**      | Interest income, trading profit, fees collected                  |
-| **SHU Projection**         | Estimated surplus for current period                             |
-| **Recent Transactions**    | Live feed of last 20 transactions                                |
-| **Pending Approvals**      | Loan applications, journal entries awaiting manager approval      |
-| **Payment Schedules**      | Loan amortization schedule with monthly payment breakdown         |
-| **Loan Calculator**        | Real-time calculation of monthly payments based on term/amount    |
-| **Alerts & Notifications** | Overdue loans, low stock items, system alerts                    |
+| **Pending Applications**   | Count of pending loan and savings applications                   |
+| **Loan Applications List** | View all loan applications with status (Pending/Approved/Reject) |
+| **Savings Applications**   | View all savings applications with status                        |
+| **Members Count**          | Total registered members                                         |
+
+**Future Phases will add:**
+- Member Overview - Registration trends
+- Savings Summary - Total deposits by product type
+- Loan Portfolio - Outstanding loans, disbursements
+- Real-time transaction feed
+- Financial analytics and reporting
+- And more...
 
 ---
 
@@ -322,18 +304,87 @@ Reorder Alert → Create PO → Supplier Confirmation → Goods Receipt → Qual
 
 ## Roadmap Considerations
 
-### Current State (Phase 1 - MVP)
+### Phase 1 - MVP (Focused Scope)
 
-- Core member management with registration workflow
-- Basic savings transactions (Pokok, Wajib, Sukarela)
-- Loan management with approval workflow
-- Trading/POS with inventory
-- Essential financial reports
-- Dashboard with key metrics
-- User and role management
-- Audit trail logging
+**Core Features Only:**
+- Member registration and login (self-service portal)
+- Loan application submission (members submit, admin reviews)
+- Savings application submission (members submit, admin reviews)
 
-### Potential Enhancements
+**Out of Scope for MVP:**
+- All transaction processing (teller operations, payments, receipts)
+- Inventory and trading/POS
+- Financial reporting and accounting
+- Dashboard analytics
+- Loan/savings activation or balance tracking
+- SHU calculations
+- Multi-branch support
+- API integrations
+
+**MVP Architecture Simplified:**
+```
+┌────────────────────────────────────┐
+│   Member Self-Service Portal       │
+│  ┌──────────────┐ ┌──────────────┐ │
+│  │ Registration │ │    Login     │ │
+│  └──────────────┘ └──────────────┘ │
+│  ┌──────────────┐ ┌──────────────┐ │
+│  │    Submit    │ │    Submit    │ │
+│  │ Loan App     │ │ Savings App  │ │
+│  └──────────────┘ └──────────────┘ │
+└────────────────────────────────────┘
+         │
+         ▼
+┌────────────────────────────────────┐
+│    Admin Dashboard (Basic)         │
+│  ┌──────────────┐ ┌──────────────┐ │
+│  │View Pending  │ │View Pending  │ │
+│  │Loan Apps     │ │Savings Apps  │ │
+│  └──────────────┘ └──────────────┘ │
+│  ┌──────────────┐ ┌──────────────┐ │
+│  │Approve/      │ │Approve/      │ │
+│  │Reject Loans  │ │Reject Savings│ │
+│  └──────────────┘ └──────────────┘ │
+└────────────────────────────────────┘
+         │
+         ▼
+┌────────────────────────────────────┐
+│      MySQL Database                │
+│  members | loan_applications       │
+│  savings_applications              │
+└────────────────────────────────────┘
+```
+
+### Phase 2 - Enhanced Features
+
+| Priority   | Feature                                                    |
+| ---------- | ---------------------------------------------------------- |
+| **High**   | Teller operations - savings transactions, loan disbursement |
+| **High**   | Loan repayment tracking and monthly payment recording      |
+| **High**   | Savings balance tracking and interest calculation          |
+| **High**   | Basic dashboard for admin to monitor applications          |
+
+### Phase 3 - Trading & Advanced Features
+
+| Priority   | Enhancement                                                    |
+| ---------- | -------------------------------------------------------------- |
+| **High**   | Trading/POS system with inventory management                  |
+| **High**   | Financial reporting (Balance Sheet, Income Statement)         |
+| **High**   | SHU calculation and distribution                              |
+| **Medium** | User Guide Documentation - Step-by-step manual for all modules |
+| **Medium** | Testing Documentation - Test cases, test data, UAT scripts     |
+
+### Phase 4 - Integrations & SaaS
+
+| Priority   | Enhancement                                                    |
+| ---------- | -------------------------------------------------------------- |
+| **Medium** | API Documentation - OpenAPI/Swagger for integrations           |
+| **Medium** | HCMS Payroll Integration - API to sync employee loans/savings  |
+| **Low**    | Mobile Application - Member self-service mobile app            |
+| **Low**    | SMS/WhatsApp Notifications - Payment reminders, balance alerts |
+| **Low**    | Multi-Tenant SaaS - Cloud deployment for multiple cooperatives |
+
+### Potential Future Enhancements
 
 | Priority   | Enhancement                                                    |
 | ---------- | -------------------------------------------------------------- |
@@ -353,88 +404,79 @@ Reorder Alert → Create PO → Supplier Confirmation → Goods Receipt → Qual
 
 ## Technical Foundation
 
-| Component             | Choice                     | Why                                                                        |
-| --------------------- | -------------------------- | -------------------------------------------------------------------------- |
-| **Backend Framework** | Laravel 11+                | Robust PHP framework with excellent ecosystem, widely adopted in Indonesia |
-| **Admin Panel**       | Laravel Filament 3         | Modern admin panel with built-in resources, forms, tables, and dashboard   |
-| **Frontend Tech**     | Livewire 3 + Alpine.js + Tailwind CSS | Server-rendered reactivity, modern UI components, reduced complexity |
-| **Database**          | MySQL 8.0+                 | Reliable RDBMS, strong ACID compliance, JSON support for flexibility       |
-| **Authentication**    | Laravel Sanctum            | Lightweight SPA authentication, API token support                          |
-| **Authorization**     | Spatie Laravel Permission  | Industry-standard role/permission management                               |
-| **PDF Generation**    | barryvdh/laravel-dompdf    | Receipt printing, report export to PDF                                     |
-| **Excel Export**      | Maatwebsite Laravel Excel  | Report export, bulk data import                                            |
-| **Audit Logging**     | Spatie Laravel Activitylog | Complete audit trail for all models                                        |
-| **File Storage**      | Laravel Storage (Local/S3) | Document uploads, member photos                                            |
-| **Queue/Jobs**        | Laravel Queue + Redis      | Background report generation, notifications                                |
-| **Caching**           | Redis                      | Session management, query caching                                          |
-| **Testing**           | PHPUnit + Pest             | Comprehensive unit and feature testing                                     |
-| **UI Components**     | Filament Admin Resources   | Pre-built resources for Members, Transactions, Reports, etc.               |
-| **API Integration**   | RESTful API + OAuth 2.0    | Secure integration with external systems like HCMS payroll                |
+| Component             | Choice                     | MVP Status                                          |
+| --------------------- | -------------------------- | --------------------------------------------------- |
+| **Backend Framework** | Laravel 11+                | ✅ MVP Ready                                        |
+| **Admin Panel**       | Laravel Filament 3         | ✅ MVP Ready - Application management               |
+| **Frontend Tech**     | Livewire 3 + Alpine.js + Tailwind CSS | ✅ MVP Ready                   |
+| **Database**          | MySQL 8.0+                 | ✅ MVP Ready                                        |
+| **Authentication**    | Laravel Sanctum            | ✅ MVP Ready - Member and admin login               |
+| **Authorization**     | Spatie Laravel Permission  | ✅ MVP Ready - Basic roles                          |
+| **PDF Generation**    | barryvdh/laravel-dompdf    | ⏳ Phase 2+ - Reports                               |
+| **Excel Export**      | Maatwebsite Laravel Excel  | ⏳ Phase 2+ - Bulk operations                       |
+| **Audit Logging**     | Spatie Laravel Activitylog | ⏳ Phase 2+ - Full audit trail                      |
+| **File Storage**      | Laravel Storage (Local/S3) | ⏳ Phase 2+ - Documents                             |
+| **Queue/Jobs**        | Laravel Queue + Redis      | ⏳ Phase 2+ - Background tasks                      |
+| **Caching**           | Redis                      | ⏳ Phase 2+ - Advanced caching                      |
+| **Testing**           | PHPUnit + Pest             | ✅ MVP - Critical path coverage                     |
+| **UI Components**     | Filament Admin Resources   | ✅ MVP - Member, Application resources              |
+| **API Integration**   | RESTful API                | ⏳ Phase 4+ - HCMS and third-party integrations    |
 
-### Integration Capabilities
+### MVP Technology Stack
 
-**HCMS Payroll Integration**
+**Included in Phase 1:**
+- Backend: Laravel 11 (PHP 8.2+)
+- Database: MySQL 8.0+
+- Frontend: Livewire 3 + Alpine.js + Tailwind CSS
+- Admin Panel: Filament 3
+- Authentication: Laravel Sanctum
+- Authorization: Spatie Laravel Permission
 
-The system provides REST APIs that expose employee member data to the HCMS payroll system:
+**Future Phases (2-4) will add:**
+- HCMS Payroll Integration with API endpoints
+- PDF/Excel export capabilities
+- Comprehensive audit logging
+- Background job queue processing
+- And more...
 
-- **Employee Loan Data**:
-  - Outstanding loan balance
-  - Monthly payment amount
-  - Loan status (Active, Completed, Default)
-  - Loan deduction for payroll processing
-
-- **Employee Savings Data**:
-  - Total savings balance by product type
-  - Mandatory vs voluntary contributions
-  - Interest accrued
-  - Withdrawal/contribution history
-
-- **API Endpoints**:
-  - `GET /api/employees/{employee_id}/loans` - Retrieve active loans
-  - `GET /api/employees/{employee_id}/savings` - Retrieve savings accounts
-  - `GET /api/employees/{employee_id}/deductions` - Calculate total monthly deductions (loans + mandatory savings)
-  - `POST /api/loans/{loan_id}/payments` - Record loan payments from payroll
-  - `POST /api/savings/{account_id}/contributions` - Record mandatory savings deductions
-
-- **Authentication**: OAuth 2.0 token-based for secure HCMS integration
-- **Real-Time Sync**: Payment and contribution data synced immediately after payroll processing
-
-### Database Schema Overview
+### Database Schema Overview (MVP)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         DATABASE ENTITIES                               │
+│                      MVP DATABASE ENTITIES                              │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
-│  MEMBERSHIP          FINANCIAL              TRADING                     │
-│  ────────────        ─────────────          ─────────────               │
-│  members             savings_products       products                    │
-│  member_types        savings_accounts       categories                  │
-│  member_documents    savings_transactions   suppliers                   │
-│  member_families     loan_products          purchase_orders             │
-│                      loans                  purchase_items              │
-│                      loan_schedules         goods_receipts              │
-│                      loan_payments          sales_orders                │
-│                      loan_collaterals       sales_items                 │
-│                                             stock_movements             │
+│  CORE MEMBERSHIP          APPLICATIONS            SYSTEM               │
+│  ────────────             ────────────            ────────────         │
+│  members                  loan_applications       users                │
+│  member_types             savings_applications    roles                │
+│                           loan_products          permissions           │
+│                           savings_products                             │
 │                                                                         │
-│  ACCOUNTING          SYSTEM                 AUDIT                       │
-│  ────────────        ─────────────          ─────────────               │
-│  chart_of_accounts   users                  activity_logs               │
-│  journal_entries     roles                  audit_trails                │
-│  journal_details     permissions            notifications               │
-│  fiscal_periods      branches               system_logs                 │
-│  account_balances    settings                                           │
-│                      parameters                                         │
+│                       (That's it for MVP!)                             │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
+```
+
+**Future Phases will add:**
+```
+FINANCIAL DATA         TRADING DATA          ACCOUNTING
+────────────          ────────────          ────────────
+savings_accounts      products              chart_of_accounts
+savings_transactions  categories            journal_entries
+loan_schedules        suppliers             journal_details
+loan_payments         purchase_orders       fiscal_periods
+loan_collaterals      sales_orders          account_balances
+                      stock_movements       
+                      
+And much more...
 ```
 
 ---
 
 ## Getting Started
 
-### For New Implementations
+### Phase 1 MVP Implementation
 
 1. **Environment Setup**
    - Install PHP 8.2+, Composer, Node.js, MySQL 8.0+
@@ -443,45 +485,81 @@ The system provides REST APIs that expose employee member data to the HCMS payro
 
 2. **Database Initialization**
    - Run migrations: `php artisan migrate`
-   - Seed initial data: `php artisan db:seed`
-   - Configure chart of accounts
+   - Seed initial loan and savings product data
+   - Create super admin user
 
 3. **System Configuration**
-   - Set up cooperative profile (name, address, registration)
-   - Configure savings and loan products
-   - Define user roles and permissions
-   - Set fiscal year and system parameters
+   - Set up cooperative profile (name, address)
+   - Configure available loan products (name, interest rate)
+   - Configure available savings products (product types)
 
-4. **Data Migration**
-   - Import existing member data (Excel template provided)
-   - Set opening balances for accounts
-   - Verify data integrity
+4. **Testing**
+   - Test member registration workflow
+   - Test member login
+   - Test loan application submission
+   - Test savings application submission
+   - Test admin approval/rejection workflow
 
-5. **Training & Go-Live**
-   - Train staff using User Guide documentation
-   - Conduct UAT with Testing documentation
-   - Parallel run before full cutover
+5. **Go-Live**
+   - First batch of members register and submit applications
+   - Admins review and approve/reject applications
+   - Monitor for issues and perform adjustments
 
-### For Existing Users
+### What to Expect in Phase 1
 
-- Access dashboard at `/dashboard` after login
-- Use side navigation to access modules
-- Refer to User Guide for detailed instructions
-- Contact support for technical issues
+✅ **Member Portal**
+- Register with email/phone
+- Login securely
+- Submit loan applications (amount, term, purpose)
+- Submit savings applications (product type, amount)
+- View application status
+
+✅ **Admin Dashboard**
+- View all pending applications
+- Approve or reject applications
+- Add notes to decisions
+- View member list
+
+### What's NOT Included in Phase 1
+
+❌ Transaction processing (deposits, withdrawals, disbursements)
+❌ Balance tracking or interest calculations
+❌ Loan repayment schedules or tracking
+❌ Financial reporting or accounting
+❌ Trading/POS system
+❌ Inventory management
+❌ Multiple user roles (teller, accountant, etc.)
+❌ PDF/Excel export
+❌ API integrations with external systems
+❌ Mobile app
+❌ SMS/email notifications
 
 ---
 
 ## Summary
 
-**Koperasi Dagang transforms cooperative management by:**
+### Phase 1 (MVP) Scope
 
-1. **Unifying Operations** - Single platform for membership, savings, loans, trading, and accounting
-2. **Automating Workflows** - Reduce manual tasks with intelligent automation and validation
-3. **Enabling Real-Time Visibility** - Live dashboards and instant reports for better decisions
-4. **Ensuring Compliance** - Built-in regulatory reports and complete audit trails
-5. **Empowering Members** - Self-service portal for transparency and convenience
-6. **Reducing Costs** - Lower operational expenses through efficiency gains
-7. **Supporting Growth** - Scalable architecture ready for multi-branch expansion
+**Koperasi Dagang MVP focuses on the foundation:**
+
+1. **Member Self-Service Portal** - Members can register and manage their applications online
+2. **Loan Application Management** - Streamlined process for members to apply for loans
+3. **Savings Application Management** - Members can apply for different savings products
+4. **Admin Application Review** - Admins can review, approve, or reject all applications
+
+### Future Growth Path (Phases 2-4)
+
+- **Phase 2**: Transaction processing, balance tracking, and financial management
+- **Phase 3**: Trading operations, reporting, and SHU calculations
+- **Phase 4**: Advanced integrations (HCMS payroll), mobile app, and multi-tenant SaaS
+
+### Key Benefits of This Phased Approach
+
+✅ **Faster Time-to-Market** - MVP delivered quickly with core functionality
+✅ **Lower Initial Investment** - Focus on essentials, reduce scope creep
+✅ **Quality Over Quantity** - Thoroughly test and refine core workflows
+✅ **Flexible Roadmap** - Adjust based on user feedback before Phase 2
+✅ **Sustainable Growth** - Build additional features incrementally
 
 ---
 
@@ -498,15 +576,14 @@ The system provides REST APIs that expose employee member data to the HCMS payro
 
 ---
 
-## Next Steps
+## Next Steps (Phase 1 MVP)
 
-1. Generate **Product Requirements Document (PRD)** for detailed functional specifications
-2. Generate **Entity Relationship Diagram (ERD)** for complete database design
-3. Generate **Functional Specification Document (FSD)** for implementation details
-4. Create **User Guide Documentation** for end-user training
-5. Create **Testing Documentation** with test cases and UAT scripts
-6. Begin development following the Laravel + MySQL stack
+1. Create **Entity Relationship Diagram (ERD)** - Show database schema for MVP tables
+2. Create **Functional Specification Document (FSD)** - Detail all MVP workflows and features
+3. Begin **Development** - Build member portal, registration, and application submission
+4. Create **Testing Documentation** - Test cases for all MVP features
+5. Conduct **UAT** - Have actual cooperative members test and provide feedback
 
 ---
 
-_This Product Brief serves as the foundation for the Koperasi Dagang project. All subsequent documentation should reference this document for consistency._
+_This focused Product Brief reflects the Phase 1 MVP scope of the Koperasi Dagang project. Once Phase 1 is complete and feedback is gathered, subsequent phases will be planned._
