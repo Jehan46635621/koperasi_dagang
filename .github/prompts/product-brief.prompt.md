@@ -1,4 +1,4 @@
----
+cle---
 description: Generate an executive-level product brief (1-page summary)
 ---
 $ARGUMENTS
